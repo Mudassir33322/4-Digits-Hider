@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIC Digit Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .uper-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #display {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .valid {
+            color: green;
+        }
+        .invalid {
+            color: red;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="uper-box">
+        <h1>Login</h1>
+        <form onsubmit="handleSubmit(event)">
+            <label>User Name</label><br>
+            <input id="username" type="text" placeholder="Enter Your Full Username" required><br>
+            
+            <label>User NIC Number</label><br>
+            <input id="nicNumber" autocomplete="off" maxlength="13" type="text" placeholder="Enter Your NIC Number" required><br>
+                
+            <div id="display"></div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault(); // Stop page refresh
+
+            const username = document.getElementById("username").value.trim();
+            const nicNumber = document.getElementById("nicNumber").value.trim();
+            const display = document.getElementById("display");
+
+            if (nicNumber.length !== 13) {
+                alert("NIC number must be exactly 13 digits!");
+                return;
+            }
+
+            // Hide middle digits: e.g., 1234512345671 → 12345-XXXXXXX-1
+            const firstPart = nicNumber.slice(0, 5);
+            const lastPart = nicNumber.slice(12);
+            const hiddenNic = `${firstPart}-XXXXXXX-${lastPart}`;
+
+    
+            // Correct validation check
+            if(nicNumber.length == 13)
+            if (nicNumber === "1234567891111" || nicNumber === "1234567890111") {
+                display.innerHTML = "Valid NIC Number";
+                display.className = "valid";
+            } else {
+                display.innerHTML = "Invalid NIC Number";
+                display.className = "invalid";
+            }
+            else{
+                alert("Write complte 13 Digits")
+            }
+
+            alert("Hello " + username + "!\nYour masked NIC: " + hiddenNic);
+        }
+    </script>
+
+</body>
+</html>
