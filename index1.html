@@ -92,16 +92,16 @@
 
     
             // Correct validation check
-            if(nicNumber.length == 13)
-            if (nicNumber === "1234567891111" || nicNumber === "1234567890111") {
-                display.innerHTML = "Valid NIC Number";
-                display.className = "valid";
+            if (nicNumber.length === 13) {
+                if (nicNumber === "1234567891111" || nicNumber === "1234567890111") {
+                    display.innerHTML = "Valid NIC Number";
+                    display.className = "valid";
+                } else {
+                    display.innerHTML = "Invalid NIC Number";
+                    display.className = "invalid";
+                }
             } else {
-                display.innerHTML = "Invalid NIC Number";
-                display.className = "invalid";
-            }
-            else{
-                alert("Write complte 13 Digits")
+                alert("Write complte 13 Digits");
             }
 
             alert("Hello " + username + "!\nYour masked NIC: " + hiddenNic);
